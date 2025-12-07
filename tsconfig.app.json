@@ -4,7 +4,14 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "baseUrl": "src",
+    "types": [],
+    "paths": {
+      "@atoms/*" : ["app/atoms/*"],
+      "@molecules/*" : ["app/molecules/*"],
+      "@organisms/*" : ["app/organisms/*"],
+      "@pages/*" : ["app/pages/*"]
+    }
   },
   "include": [
     "src/**/*.ts"
