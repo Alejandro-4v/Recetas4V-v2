@@ -10,7 +10,8 @@
       "@atoms/*" : ["app/atoms/*"],
       "@molecules/*" : ["app/molecules/*"],
       "@organisms/*" : ["app/organisms/*"],
-      "@pages/*" : ["app/pages/*"]
+      "@pages/*" : ["app/pages/*"],
+      "@models/*" : ["app/models/*"]
     }
   },
   "include": [
