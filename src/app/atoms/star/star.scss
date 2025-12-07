@@ -1,0 +1,13 @@
+.star {
+  fill: #e0e0e0;
+  stroke: #000;
+  stroke-width: 1.2px;
+}
+
+.star.full {
+  fill: #ffc107;
+}
+
+.star.half {
+  fill: url(#half-gradient);
+}
