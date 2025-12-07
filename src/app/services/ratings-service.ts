@@ -17,4 +17,10 @@ export class RatingsService {
     );
   }
 
+  getRatingsFromRecipeId(recipeId: number): Observable<Rating[]> {
+    return this.http.get<Rating[]>(
+      `https://69302440778bbf9e007001bb.mockapi.io/rating?recipeId=${recipeId}`
+    );
+  }
+
 }
