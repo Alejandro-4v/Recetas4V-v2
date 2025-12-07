@@ -11,7 +11,8 @@
       "@molecules/*" : ["app/molecules/*"],
       "@organisms/*" : ["app/organisms/*"],
       "@pages/*" : ["app/pages/*"],
-      "@models/*" : ["app/models/*"]
+      "@models/*" : ["app/models/*"],
+      "@services/*" : ["app/services/*"]
     }
   },
   "include": [
