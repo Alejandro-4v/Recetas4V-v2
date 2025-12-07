@@ -1,14 +1,14 @@
 <div class="d-inline-flex align-items-center">
 
-    @for (i of [].constructor(fullStars()); track i) {
+    @for (i of [].constructor(fullStars()); track $index) {
     <app-star type="full"></app-star>
     }
 
-    @for (i of [].constructor(halfStars()); track i) {
+    @for (i of [].constructor(halfStars()); track $index) {
     <app-star type="half"></app-star>
     }
 
-    @for (i of [].constructor(emptyStars()); track i) {
+    @for (i of [].constructor(emptyStars()); track $index) {
     <app-star type="empty"></app-star>
     }
 
