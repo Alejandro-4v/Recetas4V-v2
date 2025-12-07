@@ -1,1 +1,17 @@
-<p>rating-stars works!</p>
+<div class="d-inline-flex align-items-center">
+
+    @for (i of [].constructor(fullStars()); track i) {
+    <app-star type="full"></app-star>
+    }
+
+    @for (i of [].constructor(halfStars()); track i) {
+    <app-star type="half"></app-star>
+    }
+
+    @for (i of [].constructor(emptyStars()); track i) {
+    <app-star type="empty"></app-star>
+    }
+
+    <small class="text-muted">({{reviews()}})</small>
+
+</div>
