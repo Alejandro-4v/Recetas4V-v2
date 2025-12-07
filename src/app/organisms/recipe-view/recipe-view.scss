@@ -1,0 +1,22 @@
+.card {
+    height: 18rem;
+    width: 16rem;
+}
+
+.card-body {
+    height: 100%;
+}
+
+.card > .card-body > :first-child {
+    flex: 0 0 auto;
+}
+
+.card > .card-body > :nth-child(2) {
+    flex: 1 1 auto;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.card > .card-body > :last-child {
+    flex: 0 0 auto;
+}
