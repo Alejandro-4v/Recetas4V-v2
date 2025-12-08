@@ -1,1 +1,19 @@
-<p>main works!</p>
+<div class="container mt-5 d-flex flex-row justify-content-between">
+    <button class="btn btn-success">Crear receta</button>
+    <div class="d-flex flex-row gap-3">
+        <button class="btn btn-warning">1</button>
+        <button class="btn btn-warning">2</button>
+        <button class="btn btn-warning">3</button>
+        <button class="btn btn-warning">4</button>
+        <button class="btn btn-warning">5</button>
+    </div>
+</div>
+
+<app-recipes-list (valorar)="setIdAValorar($event)" />
+<div class="modal fade" id="ratingModal" tabindex="-1" aria-labelledby="ratingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <app-new-rating-form [recipeId]="getIdAValorar()" (enviar)="onValorar($event)" />
+        </div>
+    </div>
+</div>
