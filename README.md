@@ -1,59 +1,60 @@
-# Recetas4VV2
+# NO A LA BORRAJA
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+# Arquitectura de la Solución: Recetas4V-v2
 
-## Development server
+Este documento describe la arquitectura de la aplicación Recetas4V-v2, la cual está basada en los principios de **Diseño Atómico (Atomic Design)**. Esta metodología nos permite construir interfaces de usuario de manera sistemática, modular y escalable.
 
-To start a local development server, run:
+La estructura del proyecto se organiza en diferentes niveles de abstracción, desde los elementos más básicos hasta las páginas completas.
 
-```bash
-ng serve
-```
+## Estructura de Componentes
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+La carpeta `src/app` contiene los siguientes directorios que reflejan la arquitectura de la solución:
 
-## Code scaffolding
+### 1. Modelos (`models`)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+En este directorio se definen las interfaces y clases que modelan los datos de la aplicación. Son la base sobre la que operan los servicios y componentes.
 
-```bash
-ng generate component component-name
-```
+- **`recipe.ts`**: Define la estructura de un objeto de tipo receta.
+- **`rating.ts`**: Define la estructura para las valoraciones de las recetas.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 2. Átomos (`atoms`)
 
-```bash
-ng generate --help
-```
+Los átomos son los bloques de construcción más pequeños de la interfaz. Son componentes indivisibles y reutilizables en toda la aplicación.
 
-## Building
+- **`star`**: Un componente que representa una única estrella, utilizado para mostrar o introducir valoraciones.
 
-To build the project run:
+### 3. Moléculas (`molecules`)
 
-```bash
-ng build
-```
+Las moléculas son agrupaciones de átomos que funcionan juntos como una unidad. Representan componentes un poco más complejos.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **`labeled-field`**: Combina una etiqueta (`label`) con un campo de entrada (`input`), formando un campo de formulario completo.
+- **`rating-stars`**: Agrupa varias estrellas (`star`) para formar un sistema de valoración interactivo.
 
-## Running unit tests
+### 4. Organismos (`organisms`)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Los organismos son secciones más complejas de la interfaz, compuestas por moléculas y/o átomos. Forman partes distintas y autónomas de una página.
 
-```bash
-ng test
-```
+- **`new-recipe-form`**: El formulario completo para añadir una nueva receta.
+- **`recipe-view`**: Muestra los detalles de una receta específica.
+- **`recipes-list`**: Presenta una lista de todas las recetas.
+- **`new-rating-form`**: Formulario para que los usuarios añadan una nueva valoración.
+- **`rating-view`**: Muestra una valoración individual.
+- **`ratings-list`**: Presenta la lista de valoraciones para una receta.
 
-## Running end-to-end tests
+### 5. Páginas (`pages`)
 
-For end-to-end (e2e) testing, run:
+Las páginas son el nivel más alto de la jerarquía. Componen organismos, moléculas y átomos para construir las vistas que el usuario final ve en la aplicación.
 
-```bash
-ng e2e
-```
+- **`main`**: La página principal de la aplicación, que probablemente contiene la lista de recetas y el formulario para añadir nuevas.
+- **`ratings-page`**: Una página dedicada a mostrar y gestionar las valoraciones.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 6. Servicios (`services`)
 
-## Additional Resources
+Los servicios encapsulan la lógica de negocio y la comunicación con fuentes de datos externas (como una API o una base de datos local). No son componentes visuales, pero son cruciales para el funcionamiento de la aplicación.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **`recipes-service.ts`**: Gestiona las operaciones relacionadas con las recetas (obtener, crear, actualizar, eliminar).
+- **`ratings-service.ts`**: Gestiona la lógica de las valoraciones.
+
+## Conclusión
+
+Esta arquitectura basada en Diseño Atómico promueve la reutilización de componentes, facilita el mantenimiento y permite un desarrollo más rápido y consistente. Al tener una clara separación de responsabilidades, es más sencillo para los desarrolladores entender, modificar y ampliar la funcionalidad de la aplicación.
