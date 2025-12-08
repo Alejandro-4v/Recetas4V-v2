@@ -11,7 +11,7 @@ import { LabeledField } from "@molecules/labeled-field/labeled-field";
 })
 export class NewRatingForm {
 
-  recipe = input.required<Recipe>();
+  recipeId = input.required<number>();
 
   enviar = output<Rating>();
 
@@ -29,7 +29,7 @@ export class NewRatingForm {
 
     const newRating: Rating = {
       id: 0,
-      recipeId: this.recipe().id,
+      recipeId: this.recipeId(),
       raterName: raterName,
       rating: ratingValue
     };
