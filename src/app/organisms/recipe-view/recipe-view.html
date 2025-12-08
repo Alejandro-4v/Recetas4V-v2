@@ -9,6 +9,9 @@
             </ul>
         </div>
         <app-rating-stars [rating]='recipe().averageRating' [reviews]="recipe().ratings.length"/>
-        <button class="btn btn-danger mt-2" (click)="onEliminar()">Eliminar receta</button>
+        <div class="d-flex flex-row justify-content-between">
+            <button class="btn btn-danger mt-2" (click)="onEliminar()">Eliminar receta</button>
+            <button class="btn btn-primary mt-2" (click)="onValorar()">Valorar</button>
+        </div>
     </div>
 </div>

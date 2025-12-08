@@ -13,9 +13,14 @@ export class RecipeView {
   recipe = input.required<Recipe>();
 
   eliminar = output<number>();
+  valorar = output<number>();
 
   onEliminar() {
     this.eliminar.emit(this.recipe().id);
+  }
+
+  onValorar() {
+    this.valorar.emit(this.recipe().id);
   }
   
 }
