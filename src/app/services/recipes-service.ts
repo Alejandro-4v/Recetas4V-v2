@@ -32,6 +32,14 @@ export class RecipesService {
     );
   }
 
+  getRecipesByRating(rating: number): Observable<Recipe[]> {
+    return this.getRecipes().pipe(
+      map(recipes => recipes.filter(recipe => recipe.averageRating >= rating))
+    );
+
+  }
+
+
   deleteRecipe(id: number): void {
     this.http.delete<void>(`https://69302440778bbf9e007001bb.mockapi.io/recipe/${id}`)
       .subscribe(() => {
@@ -41,7 +49,6 @@ export class RecipesService {
 
   addRecipe(recipe: Recipe): void {
     const { id, ratings, averageRating, ...recipeWithoutRatings } = recipe;
-    alert(JSON.stringify(recipeWithoutRatings));
     this.http.post<any>('https://69302440778bbf9e007001bb.mockapi.io/recipe', recipeWithoutRatings)
       .subscribe(() => {
         this.updateSubject.next();
