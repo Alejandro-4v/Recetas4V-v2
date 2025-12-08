@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { Recipe } from '@models/recipe';
 import { RecipesService } from '@services/recipes-service';
 import { Observable, Subscription } from 'rxjs';
@@ -38,6 +38,12 @@ export class RecipesList {
 
   eliminar(recipe: Recipe): void {
     this.recipesService.deleteRecipe(recipe.id);
+  }
+
+  valorar = output<number>();
+
+  onValorar(recipe: Recipe): void {
+    this.valorar.emit(recipe.id);
   }
 
 }

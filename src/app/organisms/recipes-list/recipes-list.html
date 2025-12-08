@@ -2,7 +2,7 @@
     <div class="row">
         @for (recipe of recipes; track $index) {
         <div class="col-3 d-flex">
-            <app-recipe-view [recipe]="recipe" (eliminar)="eliminar(recipe)" class="m-auto my-2" />
+            <app-recipe-view [recipe]="recipe" (eliminar)="eliminar(recipe)" (valorar)="onValorar(recipe)" class="m-auto my-2" />
         </div>
         }
     </div>
