@@ -1,1 +1,12 @@
-<p>new-recipe-form works!</p>
+<div class="modal-header">
+    <h5 class="modal-title">Evalua la receta</h5>
+</div>
+<div class="modal-body">
+    <app-labeled-field id="recipeName" labelText="Nombre de la receta" placeholder="Bizcocho de chocolate"/>
+    <app-labeled-field id="ingredients" labelText="Ingredientes (separados por comas)" placeholder="Harina, huevo, azúcar..."/>
+    <app-labeled-field id="prepTimeMinutes" labelText="Tiempo de preparación (en minutos)" placeholder="55"/>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+    <button type="button" class="btn btn-primary" (click)="onEnviar()">Enviar</button>
+</div>

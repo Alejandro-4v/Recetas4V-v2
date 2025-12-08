@@ -1,7 +1,7 @@
-import { Component, output } from '@angular/core';
+import { Component, input, output, effect } from '@angular/core';
 import { Recipe } from '@models/recipe';
 import { RecipesService } from '@services/recipes-service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 
 import { RecipeView } from '@organisms/recipe-view/recipe-view';
 
@@ -14,22 +14,29 @@ import { RecipeView } from '@organisms/recipe-view/recipe-view';
 export class RecipesList {
 
   recipes: Recipe[] = [];
-  
-  recipes$!: Observable<Recipe[]>;
+
+  filterBy = input<number>(0);
 
   private recipesSubscription: Subscription | null = null;
 
-  constructor(private recipesService: RecipesService) {}
+  constructor(private recipesService: RecipesService) {
+    effect((onCleanup) => {
+      const subscription = this.recipesService.getRecipesByRating(this.filterBy()).subscribe(res => {
+        this.recipes = res;
+      });
+
+      onCleanup(() => subscription.unsubscribe());
+    });
+  }
 
   ngOnInit(): void {
-    this.recipes$ = this.recipesService.getRecipes();
-    this.recipes$.subscribe(res => this.recipes = res);
-
-    this.recipesSubscription = this.recipesService.changesOnRecipes.subscribe(
-      () => {
-        this.recipesService.getRecipes().subscribe(res => this.recipes = res);
+    this.recipesSubscription = this.recipesService.changesOnRecipes.pipe(
+      switchMap(() => this.recipesService.getRecipesByRating(this.filterBy()))
+    ).subscribe(
+      (res) => {
+        this.recipes = res;
       }
-    )
+    );
   }
 
   ngOnDestroy(): void {
