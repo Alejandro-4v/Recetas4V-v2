@@ -11,12 +11,13 @@ import { RatingsService } from '@services/ratings-service';
 import { RecipeView } from '@organisms/recipe-view/recipe-view';
 import { RecipesList } from "@organisms/recipes-list/recipes-list";
 import { NewRatingForm } from "@organisms/new-rating-form/new-rating-form";
+import { NewRecipeForm } from '@organisms/new-recipe-form/new-recipe-form';
 
 declare var bootstrap: any;
 
 @Component({
   selector: 'app-main',
-  imports: [RouterOutlet, RecipeView, RecipesList, NewRatingForm],
+  imports: [RouterOutlet, RecipeView, RecipesList, NewRatingForm, NewRecipeForm],
   templateUrl: './main.html',
   styleUrl: './main.scss'
 })
@@ -63,14 +64,32 @@ export class Main {
 
   private idAValorar: number = 0;
 
-  private modalInstance: any;
+  private ratingModalInstance: any;
 
   setIdAValorar(recipeId: number): void {
     this.idAValorar = recipeId;
 
-    const modal = document.getElementById('ratingModal');
-    this.modalInstance = new bootstrap.Modal(modal);
-    this.modalInstance.show();
+    const ratingModal = document.getElementById('ratingModal');
+    this.ratingModalInstance = new bootstrap.Modal(ratingModal);
+    this.ratingModalInstance.show();
+  }
+
+  private filterByRatingValue: number = 0;
+
+  setFiltro(rating: number): void {
+    console.log(rating)
+    this.filterByRatingValue = rating;
+  }
+
+  getFiltro(): number {
+    console.log("got" + this.filterByRatingValue)
+    return this.filterByRatingValue;
+  }
+
+  showNewRecipeModal() {
+    const newRecipeModal = document.getElementById('newRecipeModal');
+    const newRecipeModalInstance = new bootstrap.Modal(newRecipeModal);
+    newRecipeModalInstance.show();
   }
 
   getIdAValorar(): number {
@@ -79,6 +98,10 @@ export class Main {
 
   onValorar(rating: Rating): void {
     this.ratingsService.addRating(rating);
-    this.modalInstance.hide();
+    this.ratingModalInstance.hide();
+  }
+
+  onCrear(recipe: Recipe): void {
+    this.recipesService.addRecipe(recipe);
   }
 }
