@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Observable, forkJoin, map, switchMap } from 'rxjs';
+import { Observable, ReplaySubject, Subject, forkJoin, map, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { Recipe } from '@models/recipe';
 import { RatingsService } from '@services/ratings-service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class RecipesService {
-  
-  constructor(private http: HttpClient, private ratingsService: RatingsService) {}
+
+  updateSubject = new ReplaySubject<void>();
+  changesOnRecipes = this.updateSubject.asObservable();
+
+  constructor(private http: HttpClient, private ratingsService: RatingsService) { }
 
   getRecipes(): Observable<Recipe[]> {
     return this.http.get<Recipe[]>('https://69302440778bbf9e007001bb.mockapi.io/recipe').pipe(
       switchMap(recipes => {
-        
         const recipesWithRatings$ = recipes.map(recipe =>
           this.ratingsService.getRatingsFromRecipeId(Number(recipe.id)).pipe(
             map(ratings => ({
@@ -30,6 +30,22 @@ export class RecipesService {
         return forkJoin(recipesWithRatings$);
       })
     );
+  }
+
+  deleteRecipe(id: number): void {
+    this.http.delete<void>(`https://69302440778bbf9e007001bb.mockapi.io/recipe/${id}`)
+      .subscribe(() => {
+        this.updateSubject.next();
+      });
+  }
+
+  addRecipe(recipe: Recipe): void {
+    const { id, ratings, averageRating, ...recipeWithoutRatings } = recipe;
+    alert(JSON.stringify(recipeWithoutRatings));
+    this.http.post<any>('https://69302440778bbf9e007001bb.mockapi.io/recipe', recipeWithoutRatings)
+      .subscribe(() => {
+        this.updateSubject.next();
+      });
   }
 
 }
