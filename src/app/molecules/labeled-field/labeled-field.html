@@ -2,6 +2,6 @@
     <label id="{{id() + '-l'}}" for="{{id() + '-i'}}"
         [ngClass]="(labelClassList() || '') + ' form-label'">{{labelText()}}</label>
     <input id="{{id() + '-i'}}" [ngClass]="(inputClassList() || '') + ' form-control'" [placeholder]="placeholder() || ''"
-        type="type()" [value]="value() || ''" required="required()" (input)="onInput($event)"
+        [type]="type()" [value]="value() || ''" [required]="required()" (input)="onInput($event)"
         (keydown)="onEnter($event)">
 </div>
