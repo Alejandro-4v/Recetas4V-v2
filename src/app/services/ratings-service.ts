@@ -35,7 +35,7 @@ export class RatingsService {
     const { id, ...ratingWithoutId } = rating;
 
     this.http.post<any>('https://69302440778bbf9e007001bb.mockapi.io/rating', ratingWithoutId)
-      .subscribe(() => {
+      .subscribe( res => {
         this.updateSubject.next();
       });
   }
